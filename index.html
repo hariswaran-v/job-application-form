@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/style/style.css" />
+  </head>
+  <body>
+    <div class="bg-orange-500 min-h-screen p-10">
+      <div class="bg-white p-8 rounded-2xl shadow-lg max-w-3xl mx-auto">
+        <h1
+          class="text-2xl font-bold mb-6 text-center bg-green-500 px-3 py-2 rounded text-white"
+        >
+          Job Application Form
+        </h1>
+
+        <form class="space-y-4" id="empData">
+          <!-- Name -->
+          <div class="flex gap-4">
+            <div class="w-1/2">
+              <label class="block text-sm font-medium mb-1">Full Name</label>
+              <input
+                type="text"
+                class="w-full p-2 border rounded text-sm outline-none"
+                placeholder="Fullname"
+                name="fullname"
+                id="name"
+              />
+            </div>
+            <div class="w-1/2">
+              <label class="block text-sm font-medium mb-1">Mobile No</label>
+              <input
+                type="number"
+                class="w-full p-2 border rounded text-sm outline-none"
+                placeholder="Mobile"
+                name="mobile"
+                id="mobile"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- DOB -->
+            <div>
+              <label class="block text-sm font-medium mb-1"
+                >Date of Birth</label
+              >
+              <input
+                name="dob"
+                type="date"
+                id="dob"
+                class="w-full p-2 border rounded text-sm outline-none text-gray-400"
+                oninput="this.className=this.value?'w-full p-2 border rounded text-sm outline-none text-black':'w-full p-2 border rounded text-sm outline-none text-gray-400'"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label class="block text-sm font-medium mb-1">Email</label>
+              <input
+                name="email"
+                id="email"
+                type="email"
+                class="w-full p-2 border rounded text-sm outline-none"
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div>
+            <label class="block text-sm font-medium mb-1">Address</label>
+            <textarea
+              name="address"
+              id="address"
+              class="w-full p-2 border rounded text-sm outline-none"
+              rows="4"
+              placeholder="Your address here"
+            ></textarea>
+          </div>
+
+          <!-- Education -->
+          <div>
+            <label class="block text-sm font-medium mb-1">Education</label>
+            <input
+              name="education"
+              id="education"
+              type="text"
+              class="w-full p-2 border rounded text-sm outline-none"
+              placeholder="Your education details"
+            />
+          </div>
+
+          <!-- Skills Dropdown -->
+          <div>
+            <label for="skill" class="block text-sm font-medium mb-1"
+              >Skill</label
+            >
+            <select
+              class="w-full p-2 border rounded text-sm outline-none"
+              name="skill"
+              id="skill"
+            >
+              <option value="" disabled selected>Select a skill</option>
+              <option>Frontend Developer</option>
+              <option>Backend Developer</option>
+              <option>Fullstack Developer</option>
+              <option>Mobile Developer</option>
+              <option>Game Developer</option>
+              <option>Software Architect</option>
+              <option>Data Analysis</option>
+              <option>Cloud Engineer</option>
+            </select>
+          </div>
+          <!-- checkbox -->
+          <div class="flex items-center">
+            <input type="checkbox" /><span class="ml-2"
+              >I agree to the
+              <span class="text-red-500">terms and conditions</span>.</span
+            >
+          </div>
+          <!-- Apply Button -->
+          <div class="text-center">
+            <button
+              type="submit"
+              class="bg-blue-600 w-full text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            >
+              Apply
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="bg-white p-5 rounded max-w-8xl mx-auto mt-5" id="appCard">
+        <div>
+          <h1 class="font-semibold text-xl underline">Job Applications</h1>
+          <div class="my-5 space-y-5">
+            <table class="table sborder w-full text-center">
+              <thead class="bg-gray-100">
+                <tr>  
+                  <th class="px-2 py-1 border">S.No</th>
+                  <th class="px-2 py-1 border">Name</th>
+                  <th class="px-2 py-1 border">Mobile</th>
+                  <th class="px-2 py-1 border">Date of Birth</th>
+                  <th class="px-2 py-1 border">Email</th>
+                  <th class="px-2 py-1 border w-fit">Education</th>
+                  <th class="px-2 py-1 border w-fit">Skill</th>
+                </tr>
+              </thead>
+              <tbody id="courierDataTableBody"></tbody>
+              <!-- ✅ DIFFERENT ID HERE -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- link script files -->
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
