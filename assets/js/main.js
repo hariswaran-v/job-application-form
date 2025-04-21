@@ -1,6 +1,7 @@
 const formEl = document.getElementById("empData");
 
-const validateForm = new JustValidate("#empData", {
+const validateForm = new JustValidate(formEl, {
+  validateBeforeSubmitting: true,
   errorLabelCssClass: "form-error",
 });
 
@@ -35,3 +36,13 @@ validateForm.addField("#skill", [
 validateForm.addField("#checkbox", [
   { rule: "required", errorMessage: "The field is required" },
 ]);
+
+formEl.addEventListener("submit", () => {
+  validateForm.onSuccess((e) => {
+    const formData = new FormData(formEl);
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+  });
+  return false;
+});
