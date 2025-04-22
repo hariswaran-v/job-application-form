@@ -99,7 +99,7 @@ function getAllUserDatas() {
       tdEl3.textContent = userData.mobile;
 
       tdEl4.classList.add("px-2", "py-1", "border");
-      tdEl4.textContent = userData["dob"];
+      tdEl4.textContent = formatMyDate(userData["dob"]) ;
 
       tdEl5.classList.add("px-2", "py-1", "border");
       tdEl5.textContent = userData["email"];
