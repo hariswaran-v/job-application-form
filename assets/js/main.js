@@ -1,6 +1,7 @@
 const id = uuid.v4();
 const formEl = document.getElementById("empData");
 const localStorageKey = "userData";
+const tableEl = document.getElementById("userDataTable");
 
 const validateForm = new JustValidate(formEl, {
   validateBeforeSubmitting: true,
@@ -69,20 +70,20 @@ validateForm.onSuccess((e) => {
     newUserData.push(formValueObj);
     localStorage.setItem(localStorageKey, JSON.stringify(newUserData));
   }
-  alert("Registration is successfullu done !");
+  alert(`✅ "${formValueObj.name}" Registration is successfully done.`);
   formEl.reset();
   getAllUserDatas();
 });
+
 function getAllUserDatas() {
   // Get all stored user datas which are available in localstorage
   const userData = localStorage.getItem(localStorageKey);
   const userDataArr = JSON.parse(userData);
+  const appCardEl = document.getElementById("appCard");
 
-  if (userDataArr) {
-    const appCardEl = document.getElementById("appCard");
+  if (userDataArr && userDataArr.length > 0) {
     appCardEl.classList.remove("hidden");
     // Write those value into the table UI
-    const tableEl = document.getElementById("userDataTable");
 
     tableEl.innerHTML = "";
 
@@ -127,6 +128,9 @@ function getAllUserDatas() {
     <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/>
   </svg> 
 `;
+      deleteBtnEl.addEventListener("click", (e) => {
+        deleteCourierRequest(userData);
+      });
 
       tdEl8.classList.add("px-2", "py-1", "border");
       tdEl8.append(deleteBtnEl);
@@ -142,8 +146,24 @@ function getAllUserDatas() {
     const appCountEl = document.getElementById("appCount");
     appCountEl.textContent = newFinalValue.length;
   } else {
-    console.log("No value available on localstorage");
+    appCardEl.classList.add("hidden");
+    console.log("No value available on this list");
   }
 }
+function deleteCourierRequest(jobAppRequest) {
+  const confirmation = confirm(
+    `Do you want to delete "${jobAppRequest["name"]}" record !`
+  );
 
+  if (confirmation) {
+    const existingCourierData = localStorage.getItem(localStorageKey);
+    const courierDataObj = JSON.parse(existingCourierData);
+    const otherRecords = courierDataObj.filter(
+      (jobAppReq) => jobAppReq.id != jobAppRequest["id"]
+    );
+    // Push it localstorage again, this time, i'm deleting that record (courierRequestId)
+    localStorage.setItem(localStorageKey, JSON.stringify(otherRecords));
+    getAllUserDatas();
+  }
+}
 getAllUserDatas();
