@@ -1,3 +1,4 @@
+const id = uuid.v4();
 const formEl = document.getElementById("empData");
 const localStorageKey = "userData";
 
@@ -40,14 +41,22 @@ validateForm.addField("#checkbox", [
 
 validateForm.onSuccess((e) => {
   const formData = new FormData(formEl);
-
-  const formValueObj = Object.fromEntries(formData.entries());
-  const newUserData = [];
-
   // Get existing Localstorage value if it's exist !
   const exisitngUserData = localStorage.getItem(localStorageKey);
   // Parse that string into Javascript value
   const exisitngUserDataArray = JSON.parse(exisitngUserData);
+
+  //Based on the id, increment the id
+
+  formData.append("createdAt", Date.now());
+
+  const formValueObj = Object.fromEntries(formData.entries());
+  formValueObj.id = uuid.v4(); // Add UUID id
+
+  console.log(formValueObj);
+
+  const newUserData = [];
+
   if (exisitngUserDataArray) {
     // Create a new array and push the existing Localstorage value into new array
     exisitngUserDataArray.push(formValueObj);
@@ -62,6 +71,7 @@ validateForm.onSuccess((e) => {
   }
   alert("Registration is successfullu done !");
   formEl.reset();
+  getAllUserDatas();
 });
 function getAllUserDatas() {
   // Get all stored user datas which are available in localstorage
@@ -73,6 +83,8 @@ function getAllUserDatas() {
     appCardEl.classList.remove("hidden");
     // Write those value into the table UI
     const tableEl = document.getElementById("userDataTable");
+
+    tableEl.innerHTML = "";
 
     const newFinalValue = [];
 
@@ -99,7 +111,7 @@ function getAllUserDatas() {
       tdEl3.textContent = userData.mobile;
 
       tdEl4.classList.add("px-2", "py-1", "border");
-      tdEl4.textContent = formatMyDate(userData["dob"]) ;
+      tdEl4.textContent = formatMyDate(userData["dob"]);
 
       tdEl5.classList.add("px-2", "py-1", "border");
       tdEl5.textContent = userData["email"];
@@ -110,12 +122,11 @@ function getAllUserDatas() {
       tdEl7.classList.add("px-2", "py-1", "border");
       tdEl7.textContent = userData["skill"];
 
-      deleteBtnEl.className =
-        "px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded";
-      deleteBtnEl.textContent = "Delete";
-      deleteBtnEl.addEventListener("click", (e) => {
-        deleteCourierRequest(courierData);
-      });
+      deleteBtnEl.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="inline-block mr-1 text-red-500">
+    <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/>
+  </svg> 
+`;
 
       tdEl8.classList.add("px-2", "py-1", "border");
       tdEl8.append(deleteBtnEl);
@@ -126,7 +137,10 @@ function getAllUserDatas() {
 
     //appending the value inside of the table row
     newFinalValue.forEach((el) => tableEl.append(el));
-    // Display the UI with those datas.
+
+    //Show the applications count in UI
+    const appCountEl = document.getElementById("appCount");
+    appCountEl.textContent = newFinalValue.length;
   } else {
     console.log("No value available on localstorage");
   }
