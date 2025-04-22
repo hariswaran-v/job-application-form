@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
   <body>
-    <div class="bg-gray-500 min-h-screen p-10">
+    <div class="bg-rose-500 min-h-screen p-10">
       <div class="bg-white p-8 rounded-2xl shadow-lg max-w-3xl mx-auto">
         <h1
           class="text-2xl font-bold mb-6 text-center bg-green-600 px-3 py-2 rounded text-white"
@@ -25,7 +25,7 @@
                 type="text"
                 class="w-full p-2 border rounded text-sm outline-none"
                 placeholder="Fullname"
-                name="fullname"
+                name="name"
                 id="name"
               />
             </div>
@@ -144,45 +144,24 @@
         class="bg-white p-5 rounded max-w-8xl mx-auto mt-5 hidden"
         id="appCard"
       >
-        <div>
-          <h1 class="font-semibold text-xl underline">Job Applications</h1>
-          <div class="my-5 space-y-5">
-            <table class="table sborder w-full text-center">
-              <thead class="bg-gray-100">
-                <tr>
-                  <th class="px-2 py-1 border">S.No</th>
-                  <th class="px-2 py-1 border">Name</th>
-                  <th class="px-2 py-1 border">Mobile</th>
-                  <th class="px-2 py-1 border">Date of Birth</th>
-                  <th class="px-2 py-1 border">Email</th>
-                  <th class="px-2 py-1 border w-fit">Education</th>
-                  <th class="px-2 py-1 border w-fit">Skill</th>
-                  <th class="px-2 py-1 border w-fit">Action</th>
-                </tr>
-                <tr>
-                  <td class="px-2 py-1 border text-center">1</td>
-                  <td class="px-2 py-1 border">Hari</td>
-                  <td class="px-2 py-1 border">9876543210</td>
-                  <td class="px-2 py-1 border">21-Apr-2000</td>
-                  <td class="px-2 py-1 border">hari@example.com</td>
-                  <td class="px-2 py-1 border w-fit">B.Sc CS</td>
-                  <td class="px-2 py-1 border w-fit">React, Tailwind</td>
-                  <td class="px-2 py-1 border w-fit">
-                    <button class="bg-blue-500 text-white px-2 py-1 rounded">
-                      Edit
-                    </button>
-                    <button
-                      class="bg-red-500 text-white px-2 py-1 rounded ml-1"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              </thead>
-              <tbody id="courierDataTableBody"></tbody>
-              <!-- ✅ DIFFERENT ID HERE -->
-            </table>
-          </div>
+        <h1 class="font-semibold text-xl underline">Job Applications</h1>
+        <div class="my-5 space-y-5">
+          <table class="table sborder w-full text-center" id="userDataTable">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-2 py-1 border">S.No</th>
+                <th class="px-2 py-1 border">Name</th>
+                <th class="px-2 py-1 border">Mobile</th>
+                <th class="px-2 py-1 border">Date of Birth</th>
+                <th class="px-2 py-1 border">Email</th>
+                <th class="px-2 py-1 border w-fit">Education</th>
+                <th class="px-2 py-1 border w-fit">Skill</th>
+                <th class="px-2 py-1 border w-fit">Action</th>
+              </tr>
+            </thead>
+            <tbody id="courierDataTableBody"></tbody>
+            <!-- ✅ DIFFERENT ID HERE -->
+          </table>
         </div>
       </div>
     </div>
